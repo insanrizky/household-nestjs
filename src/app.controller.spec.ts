@@ -13,8 +13,8 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return "WaveTech Electronics Pte Ltd"', () => {
+      expect(appController.getHello()).toBe('WaveTech Electronics Pte Ltd');
     });
   });
 });

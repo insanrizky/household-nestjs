@@ -1,18 +1,22 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { AppController } from 'src/app.controller';
-import { AuthModule } from 'src/auth/auth.module';
-import { UsersModule } from 'src/users/users.module';
-import MongoConfigService from 'src/configs/mongo';
+import { AppController } from './app.controller';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
+import { ProductModule } from './product/product.module';
+import { ClaimModule } from './claim/claim.module';
+import MongoConfigService from './configs/mongo';
 
 @Module({
   imports: [
     MongooseModule.forRootAsync({
       useClass: MongoConfigService,
     }),
-    UsersModule,
+    UserModule,
     AuthModule,
+    ProductModule,
+    ClaimModule,
   ],
   controllers: [AppController],
 })

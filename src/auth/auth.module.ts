@@ -7,15 +7,15 @@ import { AuthService } from './auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AuthController } from './auth.controller';
 
-import authConfig from 'src/configs/auth';
-import { UsersModule } from 'src/users/users.module';
+import authConfig from '../configs/auth';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [authConfig],
     }),
-    UsersModule,
+    UserModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

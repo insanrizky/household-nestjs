@@ -7,8 +7,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import * as _ from 'lodash';
-import { UserDocument } from 'src/schemas/user.schema';
-import { UsersService } from 'src/users/users.service';
+import { UserDocument } from '../schemas/user.schema';
+import { UserService } from '../user/user.service';
 import { AuthService } from '../auth/auth.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
@@ -16,7 +16,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 export class AuthController {
   constructor(
     private authService: AuthService,
-    private userService: UsersService,
+    private userService: UserService,
   ) {}
 
   @Post('login')

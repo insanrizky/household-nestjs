@@ -2,12 +2,12 @@ import * as bcrypt from 'bcrypt';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { UsersService } from '../users/users.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private jwtService: JwtService,
   ) {}
 
@@ -22,7 +22,7 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.FORBIDDEN);
     }
 
-    const payload = { username: user.username, id: user._id };
+    const payload = { username: user.username, id: user._id, role: user.role };
     return {
       token_type: 'Bearer',
       access_token: this.jwtService.sign(payload),
