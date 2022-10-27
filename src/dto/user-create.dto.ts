@@ -1,5 +1,5 @@
-import { IsIn, IsNotEmpty, IsString, MinLength } from 'class-validator';
-import { USER_TYPES } from 'src/users/constants';
+import { IsEnum, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { Role } from 'src/schemas/user.schema';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -16,6 +16,6 @@ export class CreateUserDto {
   password: string;
 
   @IsNotEmpty()
-  @IsIn(USER_TYPES)
-  type: string;
+  @IsEnum(Role)
+  role: string;
 }
