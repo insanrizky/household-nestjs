@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDto } from 'src/dto/user-create.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -9,7 +10,14 @@ export class UsersController {
 
   @Post()
   async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+    const salt = await bcrypt.genSalt();
+    const encryptedPassword = await bcrypt.hash(createUserDto.password, salt);
+
+    const data: CreateUserDto = {
+      ...createUserDto,
+      password: encryptedPassword,
+    };
+    return this.userService.create(data);
   }
 
   @UseGuards(JwtAuthGuard)
