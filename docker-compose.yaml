@@ -1,0 +1,27 @@
+version: "1"
+services:
+  back_app:
+    depends_on:
+      - db
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - JWT_SECRET_KEY=mayipassthetest
+      - JWT_EXPIRED_TIME=30m
+      - MONGO_URI=mongodb://db_mongo/tictag
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      
+  db:
+    image: mongo
+    container_name: db_mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongodata: 
